@@ -1,0 +1,69 @@
+<html>
+	<head>
+		<style>
+			html, body {
+				margin: 0; width: 100%; height: 100%;
+				background: #000;
+				overflow: hidden;
+			}
+			iframe { border: 0; bacdkground: #000; }
+			#video {
+				min-width: 100px; position: absolute;
+				left: 0; top: 0;
+				resize: horizontal;
+			}
+			#chat {
+				min-width: 100px; height: 100%;
+				position: absolute;
+				right: 0; top: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<iframe id="video" src="http://player.twitch.tv/?html5&amp;channel=channelname"></iframe>
+		<iframe id="chat" src="http://www.twitch.tv/channelname/chat"></iframe>
+		<script>
+			var channelname = document.location.search.replace(/^\?/, '');
+			var vidMin = 100;
+			var chatMin = 250;
+			var rafId;
+			var video = document.querySelector('#video');
+			var chat = document.querySelector('#chat');
+			var winWidth = document.documentElement.offsetWidth;
+			video.style.width = (winWidth-chatMin)+'px';
+			chat.style.width = chatMin+'px;';
+
+			video.src = video.src.replace(/channel\=[a-z]+/, 'channel='+channelname);
+			chat.src = chat.src.replace(/\/[a-z]+\/chat/, '/'+channelname+'/chat');
+
+			function windowResize() {
+				winWidth = document.documentElement.offsetWidth;
+				var cw = Math.max(chat.offsetWidth, chatMin);
+				var vw = winWidth-cw;
+				video.style.width = vw+'px';
+				video.style.height = (vw * 10 / 16)+'px';
+				chat.style.width = cw+'px';
+				vwPrev = vw;
+			}
+
+			var vwPrev = -1;
+			function resize(force) {
+				var vw = video.offsetWidth;
+				if(vw === vwPrev) return;
+				vw = Math.min(Math.max(vw, vidMin), winWidth-chatMin);
+				var cw = winWidth-vw;
+				video.style.width = vw+'px';
+				video.style.height = (vw * 10 / 16)+'px';
+				chat.style.width = cw+'px';
+				vwPrev = vw;
+			}
+			function resizer() {
+				rafId = window.requestAnimationFrame(resizer);
+				resize();
+			}
+			resizer();
+			window.addEventListener('resize', windowResize);
+			resize(true);
+		</script>
+	</body>
+</html>

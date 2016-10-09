@@ -1,0 +1,534 @@
+/*
+Icon classes can be used entirely standalone. They are named after their original file names.
+
+Example usage in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
+*/
+.icon-emoticon-angel {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -28px 0px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-anger {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -28px -168px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-awakekat {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: 0px -28px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-baby {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -28px -28px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-beaten {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -56px 0px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-bigeye {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -56px -28px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-bless {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: 0px -56px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-bobstriker {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -28px -56px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-boil {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -56px -56px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-bug {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -84px 0px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-c {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -84px -28px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-ca2 {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -84px -56px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-camwhite {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: 0px -84px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-cat {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -28px -84px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-cplusplus {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -56px -84px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-csharp {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -84px -84px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-disgusting {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -112px 0px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-displeasure {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -112px -28px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-dragongyi {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -112px -56px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-dyerrington {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -112px -84px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-eureka {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: 0px -112px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-evilsoft {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -28px -112px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-extrimely {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -56px -112px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-eyebrow {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -84px -112px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-eyeglasses {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -112px -112px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-fear {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -140px 0px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-fearmediocrity {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -140px -28px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-folly {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -140px -56px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-frowning {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -140px -84px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-gigless {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -140px -112px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-good {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: 0px -140px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-heart {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -28px -140px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-heart3 {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -56px -140px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-heat {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -84px -140px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-hi {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -112px -140px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-html {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -140px -140px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-inkblotty {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -168px 0px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-inlove {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -168px -28px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-java {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -168px -56px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-javascript {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -168px -84px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-jhovgaard {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -168px -112px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-killroy {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -168px -140px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-learntoprogram {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: 0px -168px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-like {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: 0px 0px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-lips {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -56px -168px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-lol {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -84px -168px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-loud {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -112px -168px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-monocle {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -140px -168px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-nausea {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -168px -168px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-ninja {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -196px 0px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-objectivec {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -196px -28px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-php {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -196px -56px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-pull {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -196px -84px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-push {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -196px -112px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-python {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -196px -140px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-questioning {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -196px -168px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-rock {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: 0px -196px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-rollseyes {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -28px -196px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-rose {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -56px -196px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-ruby {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -84px -196px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-scary {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -112px -196px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-shoot {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -140px -196px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-shout {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -168px -196px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-shysmile {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -196px -196px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-sleep {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -224px 0px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-slyness {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -224px -28px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-smile {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -224px -56px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-smooth {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -224px -84px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-sobbing {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -224px -112px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-sorrow {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -224px -140px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-sql {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -224px -168px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-stephenwolfram {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -224px -196px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-stop {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: 0px -224px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-stressed {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -28px -224px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-surprised {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -56px -224px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-sweating {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -84px -224px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-swift {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -112px -224px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-taddiemania {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -140px -224px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-tears {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -168px -224px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-thumbsup {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -196px -224px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-tongueout {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -224px -224px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-victory {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -252px 0px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-welcome {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -252px -28px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-well {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -252px -56px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-welling {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -252px -84px;
+  width: 28px;
+  height: 28px;
+}
+.icon-emoticon-yhoshino11 {
+  background-image: url(img/sprite-emoticons-preview.png);
+  background-position: -252px -112px;
+  width: 28px;
+  height: 28px;
+}

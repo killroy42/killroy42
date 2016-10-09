@@ -1,0 +1,486 @@
+/* Some overrides required to place everything related to Candy-Chat into its container */
+
+/* Pro badge for premium users */
+#candy .message.lctv-premium > a:before {
+    display: inline-block;
+    position: relative;
+    top: 5px;
+    content: "";
+    width: 22px;
+    height: 22px;
+    background: url(img/pro-badge.png) no-repeat;
+    margin-right: 5px;
+}
+
+#candy {
+    color: #999;
+    background: #666;
+    border-radius: 4px;
+}
+
+#chat-rooms .message,
+#message-textarea {
+    font-family: Tahoma, Verdana, Arial, sans-serif !important;
+}
+
+#chat-rooms .jspHorizontalBar {
+    visibility: hidden;
+}
+
+#chat-rooms .message {
+    word-wrap: break-word;
+}
+
+#candy .message-pane:focus,
+#candy .jspContainer,
+#candy .message-pane-wrapper {
+    outline: none;
+}
+
+#chat-modal {
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+#chat-modal input[type='text'] {
+    width: 170px;
+}
+#chat-modal input.button {
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    background-color: #2574a9;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+}
+
+#chat-modal input.button:hover {
+    background-color: #76b6e1;
+}
+#chat-rooms div.message-pane-wrapper ul.message-pane li.message > a {
+    display: inline-block;
+}
+#chat-rooms div.message-pane-wrapper ul.message-pane li.message .role-moderator {
+    color: #0072c6;
+}
+#chat-rooms li.message .affiliation-owner:after {
+    content: '[owner]';
+    padding: 0 2px 0 5px;
+    color: #db0e0e;
+    font-weight: 600;
+}
+#chat-rooms li.message.lctv-staff .affiliation-admin:after {
+    content: '[admin]';
+    padding: 0 2px 0 5px;
+    color: #a6a8ab;
+    font-weight: 600;
+}
+#chat-rooms div.message-pane-wrapper ul.message-pane li.message .affiliation-owner {
+    color: #db0e0e;
+    font-size: 15px;
+}
+
+.message-pane li.message small.timestamp {
+    font-style: normal;
+    color: #768e9e;
+    margin-right: 5px;
+}
+
+#context-menu {
+	margin: 0;
+    z-index: 500;
+}
+
+.roster-pane .user li.context {
+    display: none;
+}
+.role-moderator .roster-pane .user li.context {
+    display: block;
+}
+.role-moderator .roster-pane .me.user li.context {
+    display: none;
+}
+
+.message a {
+    color: #2574a9;
+}
+
+.message a:hover {
+    color: #76b6e1;
+}
+
+.message a.nickname {
+    font-weight: bold;
+    font-style: normal;
+    color: #404041;
+    margin-right: 5px;
+    padding: 0px;
+    font-size: 100%;
+    position: relative;
+}
+.message.lctv-staff .nickname:before {
+    background-image: url('../img/chat-lctv.png');
+    top: 0;
+    width: 15px;
+    height: 15px;
+}
+
+#chat-toolbar {
+    position: absolute;
+    z-index: 400;
+    right: 35px;
+    top: 0;
+    height: 26px;
+    width: 100px;
+    background-color: #16191e;
+    border-top: none;
+    box-shadow: none;
+}
+.poped-out #chat-toolbar {
+  right: 10px;
+  width: 140px;
+}
+.poped-out .chat-heading--title {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.roster-pane {
+    z-index: 10;
+    left: 0;
+    top: 28px;
+    width: 100%;
+    background-color: #29303C;
+    border: none;
+    box-shadow: none;
+    bottom: 88px;
+    margin: 0;
+    display: none;
+}
+.roster-pane .user {
+    border: none;
+    box-shadow: none;
+}
+.roster-pane .user:hover {
+    background-color: transparent;
+}
+.roster-pane .user.role-moderator .label {
+    color: #0072c6;
+    padding-left: 0;
+}
+.roster-pane .label {
+    font-weight: bold;
+    font-style: italic;
+    color: #e7e9e8;
+    font-size: 12px;
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    text-shadow: none;
+    text-align: left;
+    padding-left: 0;
+}
+.roster-pane ul {
+    text-align: right;
+}
+.roster-pane li.role-moderator {
+    width: initial;
+    height: initial;
+    float: none;
+}
+.roster-pane li.role-moderator:after {
+    color: #f4515e;
+}
+#chat-toolbar .usercount {
+    float: left;
+}
+#context-menu .emoticons {
+    width: 296px;
+    box-sizing: border-box;
+}
+#context-menu .emoticons .icon {
+    display: inline-block;
+}
+#context-menu .emoticons img,
+.message-pane .emoticon,
+.message-pane .kappa {
+    height: 28px;
+    width: 28px;
+}
+.message {
+    background: none;
+    cursor: default;
+    padding-left: 10px;
+}
+.roster-pane .user {
+    cursor: default;
+}
+#chat-toolbar .usercount {
+    cursor: pointer;
+}
+.roster-pane li.context {
+    background-color: #666;
+    border-radius: 4px;
+}
+.roster-pane li {
+    width: 30px;
+}
+.left-inherit {
+    left: inherit;
+}
+.right-inherit {
+    right: inherit;
+}
+#chat-toolbar #username-color {
+    background: url(img/chat-color-theme-one.png);
+    width: 20px;
+    height: 28px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#context-menu .user-color-list {
+    width: 160px;
+    padding: 5px 0 5px 5px;
+    box-sizing: border-box;
+}
+#context-menu .user-color-item {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 0;
+    box-sizing: border-box;
+}
+#context-menu .user-premium-item {
+    display: block;
+    clear: both;
+    margin: 0;
+    padding: 5px 0 0;
+    width: 150px;
+}
+#context-menu .user-color-list li:hover {
+    background-color: transparent;
+}
+#context-menu .user-premium-item {
+    cursor: default;
+}
+#context-menu .user-premium-item input {
+    display: inline-block;
+    height: 25px;
+    padding: 2px;
+    line-height: 25px;
+    width: 104px;
+    border: 1px solid #a9a9a9;
+    background-color: #e7e7e7;
+    box-sizing: border-box;
+}
+#context-menu .user-premium-item button {
+    display: inline-block;
+    margin-left: 5px;
+    background-color: #2574a9;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+    border: none;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+}
+#context-menu .user-premium-item button:hover {
+    background-color: #76b6e1;
+}
+#candy .candy-popup-opener .popout-icon {
+    background-image: url(img/chat-popout-2-theme-one.png);
+    display: inline-block;
+    width: 19px;
+    height: 18px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#chat-toolbar .usercount {
+    background-image: url(img/chat-users-theme-one.png);
+    height: 26px;
+    width: 20px;
+    float: right;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#chat-toolbar .usercount #chat-usercount {
+    display: none;
+}
+.poped-out #chat-toolbar .usercount {
+  margin-right: 3px;
+  background-position: center right;
+  width: auto;
+}
+.poped-out #chat-toolbar .usercount #chat-usercount {
+    display: block;
+    background-color: transparent;
+    font-size: 16px;
+    font-family: 'Lato', sans-serif;
+    padding-right: 17px;
+    padding-top: 3px;
+}
+#chat-toolbar #chat-sound-control.checked {
+    background-image: url(img/chat-sound-on-theme-one.png);
+}
+#chat-toolbar #chat-sound-control {
+    background-image: url(img/chat-sound-off-theme-one.png);
+    width: 20px;
+    height: 28px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#chat-toolbar #chat-theme-switch {
+    background-image: url(img/color-scheme-switch-theme-one.png);
+    width: 20px;
+    height: 28px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#emoticons-icon {
+    background: url(img/chat-smiles-theme-one.png);
+    width: 21px;
+    height: 21px;
+    position: absolute;
+    right: 9px;
+    bottom: 60px;
+    z-index: 100;
+    cursor: pointer;
+}
+#pastebin-icon {
+    background: url(img/pastebin-theme-one.png);
+    background-repeat: no-repeat;
+    width: 85px;
+    height: 21px;
+    position: absolute;
+    left: 10px;
+    bottom: 5px;
+    z-index: 100;
+    cursor: pointer;
+    padding-left: 30px;
+    color: #768E9E;
+}
+#candy, #chat-pane, #chat-rooms, .chat-heading, .message-textarea {
+    border-radius: 0;
+    background-color: #16191e;
+}
+.chat-heading, .message-pane-wrapper, .message-textarea, .message-form textarea, .message-pane {
+    background-color: #16191e;
+}
+.chat-heading div {
+    border-bottom: 2px solid #768e9e;
+    margin: 5px 10px;
+    text-transform: capitalize;
+}
+.message-textarea {
+    padding: 0 50px 0 0;
+}
+.message-form textarea {
+    border: none;
+    color: #e7e9e8;
+}
+.message-form textarea::-webkit-input-placeholder {color: #768e9e;}
+.message-form textarea:-ms-input-placeholder {color: #768e9e;}
+.message-form textarea::-moz-placeholder {color: #768e9e;}
+.message-form textarea:-moz-placeholder {color: #768e9e;}
+
+#chat-rooms .message-form {
+    border-top: 2px solid #768e9e;
+    margin: 0 10px;
+}
+.room-pane {
+    padding-top: 35px;
+}
+#chat-rooms .message.delayed,
+#chat-rooms .message.delayed a {
+    color: #ccc ! important;  /* Important, because nickname colors are set inline */
+}
+
+/*Highlight js*/
+.candy_container pre {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin-top: 5px;
+    border-radius: 0;
+    margin-bottom: 5px;
+}
+
+#context-menu .add-moderator {
+  background-image: url(img/add-moderator.png);
+}
+#context-menu .remove-moderator {
+  background-image: url(img/remove-moderator.png);
+}
+
+
+/* === Chat default theme overrides ===*/
+.theater-mode #candy {border-left: 2px solid #768E9E;}
+/* === End Chat default theme overrides ===*/
+
+/* === Chat theme one (white) === */
+
+/* === We don't have properly configured main theme, so all new themes will extend styles from main theme. === */
+/* === TODO: Separate candy_chat styles from our own. Create basic theme without changing candy_chat css code. === */
+
+.chat-theme-one #candy,
+.chat-theme-one #chat-pane,
+.chat-theme-one #chat-rooms,
+.chat-theme-one .message-pane,
+.chat-theme-one .chat-heading,
+.chat-theme-one .message-textarea,
+.chat-theme-one .message-pane-wrapper,
+.chat-theme-one .message-form textarea {
+  background-color: #fff;
+}
+
+.theater-mode .chat-theme-one #candy {border-left: none;}
+
+.chat-theme-one .roster-pane {background-color: #f6f6f6;}
+
+.chat-theme-one .chat-heading div {border-color: #f6f6f6;}
+.chat-theme-one #chat-rooms .message-form {border-color: #f6f6f6;}
+
+.chat-theme-one .chat-heading {color: #131313;}
+
+.chat-theme-one .usercount span {color: #6b6d6f;}
+
+.chat-theme-one .message {color: #000;}
+.chat-theme-one .message-form textarea {color: #000;}
+
+.chat-theme-one .message-pane li.message small.timestamp {color: #6b6d6f;}
+.chat-theme-one #chat-rooms li.message .affiliation-owner:after {color: #db0e0e;}
+
+.chat-theme-one .message-form input.submit {color: #2574a9;}
+.chat-theme-one .message-form input.submit:hover {color: #76b6e1;}
+
+.chat-theme-one #context-menu ul {background-color: #f7f7f7;}
+
+.chat-theme-one .arrow {background: url(img/tooltip-arrows.gif) no-repeat left bottom;}
+.chat-theme-one .right-bottom .arrow-bottom {background-position: right bottom;}
+.chat-theme-one .arrow-top {display: none; background-position: left top;}
+.chat-theme-one .right-top .arrow-top {display: block; background-position: right top;}
+.chat-theme-one .left-top .arrow-top {display: block;}
+.chat-theme-one .left-top .arrow-bottom, .right-top .arrow-bottom {display: none;}
+
+.chat-theme-one #emoticons-icon {background: url(img/chat-smiles.png);}
+.chat-theme-one #pastebin-icon {background: url(img/pastebin.png); background-repeat: no-repeat;}
+.chat-theme-one #chat-toolbar {background-color: #fff;}
+.chat-theme-one #chat-toolbar .usercount {background-image: url(img/chat-users.png);}
+.chat-theme-one #chat-toolbar #username-color {background: url(img/chat-color.png) center no-repeat;}
+.chat-theme-one #chat-toolbar #chat-sound-control {background-image: url(img/chat-sound-off.png);}
+.chat-theme-one #chat-toolbar #chat-sound-control.checked {background-image: url(img/chat-sound-on.png);}
+.chat-theme-one #candy .candy-popup-opener .popout-icon {background-image: url(img/chat-popout-2.png);}
+.chat-theme-one #chat-toolbar #chat-theme-switch {background-image: url(img/color-scheme-switch.png);}
+
+.chat-theme-one #context-menu li.candy-namecomplete-option.selected,
+.chat-theme-one #context-menu li.candy-namecomplete-option:hover {background-color: #ccc;}
+.chat-theme-one #context-menu li.candy-namecomplete-option {color: #333;}
+
+.chat-theme-one .roster-pane .label {color: #404041;}
+
+/* === End Chat theme one (black) === */

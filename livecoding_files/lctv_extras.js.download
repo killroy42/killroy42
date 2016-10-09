@@ -1,0 +1,294 @@
+"use strict";
+
+var CandyShop = (function(self) { return self; }(CandyShop || {}));
+
+CandyShop.LivecodingExtras = (function(self, Candy, $, ColorUtils) {
+
+    var _defaultPalettes = {
+            // NOTE: Basic colors MUST match the colors in settings.XMPP_BASIC_NICK_COLORS
+            // TODO: Pass those from backend, don't just statically maintain a copy here.
+            false: [
+                "#e35b5b", "#e3a85b", "#d1e35b", "#8ee35b", "#5be3a8",
+                "#5bbbe3", "#5b74e3", "#915be3", "#e35bde"
+            ],
+            true: [
+                "#e35b5b", "#e3a85b", "#d1e35b", "#8ee35b", "#5be3a8",
+                "#5bbbe3", "#5b74e3", "#915be3", "#e35bde", "#e35b98",
+                "#e35b5b", "#984545", "#8b4598", "#455598", "#459893",
+                "#459866", "#769845", "#987c45"
+            ]
+        },
+        _prohibitedColorsLab = {},  // Those will be passed to init.
+        _deltaEThreshold = null,
+        _templates = {
+            colorMenu: '{{#palette}}<li class="user-color-item" style="background: {{.}}" data-color="{{.}}">' +
+                                   '</li>{{/palette}}' +
+                       '{{#premium}}<li class="user-premium-item">' +
+                           '<input {{#inputColor}}type="color" value="{{currentColor}}"{{/inputColor}}' +
+                           '{{^inputColor}}type="text" maxlength="7"{{/inputColor}} id="colorPremiumInput"' +
+                           ' placeholder="your color"/>{{^inputColor}}<button id="colorPremiumSubmit">Set</button>{{/inputColor}}</li>{{/premium}}'
+        },
+        _colorInputSupported = false,
+        _isPremium = true,
+        _currentColor = "",
+        _palette = ["#badc0d"],
+        _currentTheme1 = false;
+
+    // TODO: Figure out isPremium and nickColor from presence stanza as we join the room.
+    self.init = function(isPremium, nickColor, prohibitedColors, deltaEThreshold) {
+        _isPremium = !!isPremium;
+        _currentColor = nickColor || "";
+        _palette = _defaultPalettes[_isPremium];
+        _prohibitedColorsLab = {};
+        if (deltaEThreshold !== null) {
+            // A null threshold means to not check, so keep the color map empty.
+            $.each(prohibitedColors, function (_unusedIndex, colorHex) {
+                _prohibitedColorsLab[colorHex] = ColorUtils.rgb_to_lab(ColorUtils.parse_rgb(colorHex));
+            });
+        }
+        _deltaEThreshold = deltaEThreshold;
+        Candy.Core.isThisUserPro = _isPremium; // HAX: We need this to be accessible from other places. Ugly, I know.
+
+        $(Candy).on("candy:core.presence.room", function(e, args) {
+            var user = args.user,
+                stanza = args.stanza;
+            var $item = stanza.find("> x[xmlns='https://www.livecoding.tv/xmpp/muc#user'] > item");
+            if ($item.length > 0) {
+                var data = {};
+                $item.each(function() {
+                    $.each(this.attributes, function() {
+                        if(this.specified) {
+                            data[this.name] = this.value;
+                        }
+                    });
+                });
+                Candy.Core.log("MUC Presence: extras for " + user.getNick() + " (" + user.getJid() + "): "
+                               + JSON.stringify(data));
+                user.setCustomData(data);
+            }
+        });
+
+        $(Candy).on("candy:core.message.unknown", function(e, args) {
+            var msg = args.stanza;
+            if (msg && msg.children("clear[xmlns='https://www.livecoding.tv/xmpp/muc#admin']").length > 0
+                    && msg.attr("type") === "groupchat") {
+                var roomJid = Candy.Util.unescapeJid(Strophe.getBareJidFromJid(msg.attr("from")));
+                Candy.Core.log("Request to clear chat history for " + roomJid);
+                Candy.View.Pane.Room.getPane(roomJid, ".message-pane").children().remove();
+            }
+        });
+
+        $(Candy).on('candy:view.message.before-send', function(e, args) {
+            console.log("before-send", args);
+            var regexp = /\/(\S+)\s?(.+)?/;
+            var command = regexp.exec(args.message);
+            if (command) {
+                var currentView = Candy.View.getCurrent();
+                var messageTextArea = Candy.View.Pane.Room.getPane(currentView.roomJid).find('#message-textarea');
+                switch (command[1].toLowerCase()) {
+                    case 'clear':
+                        if (currentView && currentView.roomJid) {
+                            self.clearRoomHistory(currentView.roomJid);
+                            messageTextArea.val("").focus();
+                            return false;
+                        }
+                        break;
+                    case 'unban':
+                        var commandArgument = command[2];
+                        if (currentView && currentView.roomJid && typeof commandArgument === 'string') {
+                            var userJid = $.trim(commandArgument).toLowerCase() + '@livecoding.tv';
+                            self.unbanUser(currentView.roomJid, userJid);
+                            messageTextArea.val("").focus();
+                            return false;
+                        }
+                        break;
+                }
+            }
+        });
+
+        // TODO: Use Modernizr.inputtypes.color to detect support?
+        var test = document.createElement("input");
+        test.setAttribute("type", "color");
+        _colorInputSupported = test.type !== "text";
+
+        var updateChatTheme = function () {
+            if (_currentTheme1) {
+                $(".candy_container").addClass("chat-theme-one");
+                updateChatEmoticons("white");
+            } else {
+                $(".candy_container").removeClass("chat-theme-one");
+                updateChatEmoticons("dark");
+            }
+        };
+
+        var updateChatEmoticons = function(theme) {
+            $(".message-pane li img.emoticon").each(function() {
+                var updatedPath = $(this).attr("src").replace(/emoticons-.*\//, "emoticons-" + theme + "/");
+                $(this).attr("src", updatedPath);
+            });
+        };
+
+        // TODO: Possibly, do this query before we even set up chat and pass initial theme as setting.
+        LivecodingTV.kvStorage.getData(["chat/theme1"], function (data) {
+            _currentTheme1 = !!data["chat/theme1"];
+            updateChatTheme();
+        });
+        $("#chat-theme-switch").click(function (e) {
+            e.preventDefault();
+            _currentTheme1 = !_currentTheme1;
+            updateChatTheme();
+            LivecodingTV.kvStorage.setData({"chat/theme1": !!_currentTheme1});
+        });
+
+        var toolbarButton = $('<li id="username-color" title="Choose color"></li>');
+        $('#chat-sound-control').after(toolbarButton);
+        toolbarButton.on("click", function() {
+            self.showPicker(isPremium);
+            $('#tooltip').hide();
+        });
+
+        Candy.Core.log("Livecoding.tv XMPP extras module loaded");
+    };
+
+    self.clearRoomHistory = function (roomJID) {
+        var conn = Candy.Core.getConnection();
+        return conn.send(
+            $msg({to: roomJID, from: conn.jid, type: "groupchat"})
+                .c("clear", {xmlns: "https://www.livecoding.tv/xmpp/muc#admin"}));
+    };
+
+    self.unbanUser = function(roomJid, userJid) {
+        roomJid = Candy.Util.escapeJid(roomJid);
+        userJid = Candy.Util.escapeJid(userJid);
+        var itemObj = {
+            jid: userJid,
+            affiliation: "none"
+        };
+        return Candy.Core.getConnection().sendIQ($iq({
+            type: "set",
+            to: roomJid
+        }).c("query", {
+            xmlns: Strophe.NS.MUC_ADMIN
+        }).c("item", itemObj).tree());
+    };
+
+    self.showPicker = function () {
+        var menu = $("#context-menu"),
+            list = $("ul", menu);
+
+        $("#tooltip").hide();
+        list.addClass("user-color-list clearfix").html(
+            Mustache.to_html(_templates.colorMenu, {
+                palette: _palette,
+                premium: _isPremium,
+                inputColor: _colorInputSupported,
+                currentColor: _currentColor
+            })
+        );
+        list.find(".user-color-item").on("click", function () {
+            self._updateColor($(this).attr('data-color'));
+            menu.fadeOut("fast");
+        });
+        var isUpdatingCustomColor = false;
+        var onSetCustomColor = function () {
+            if (isUpdatingCustomColor) { return false; }
+            isUpdatingCustomColor = true;
+            try {
+                var result = setCustomColor($("#colorPremiumInput").val());
+            } finally {
+                isUpdatingCustomColor = false;
+            }
+            return result;
+        };
+        var setCustomColor = function (customColorText) {
+            var colorMatch = /^#?([0-9A-Fa-f]{6})$/.exec(customColorText);
+            if (colorMatch !== null) {
+                var color = "#" + colorMatch[1],
+                    colorRGB = ColorUtils.parse_rgb(color),
+                    colorLab = ColorUtils.rgb_to_lab(colorRGB),
+                    isGoodColor = true;
+
+                if (_deltaEThreshold !== null) {
+                    $.each(_prohibitedColorsLab, function (key, prohibitedColorLab) {
+                        var deltaE = ColorUtils.ciede2000(prohibitedColorLab, colorLab);
+                        if (deltaE < _deltaEThreshold) {
+                            console.log("[Livecoding.tv] Unacceptable color: " + color +
+                                ", CIE2000 deltaE " + deltaE + " (< " + _deltaEThreshold +
+                                ") with restricted color " + key);
+                            isGoodColor = false;
+                            return false;
+                        } else {
+                            console.log("[Livecoding.tv] Color passed check: " + color +
+                                ", CIE2000 deltaE " + deltaE + " (< " + _deltaEThreshold +
+                                ") against the restricted color " + key);
+                        }
+                    });
+                }
+
+                if (!isGoodColor) {
+                    // Color's too close to prohibited one.
+                    var colorHSL = ColorUtils.rgb_to_hsl(colorRGB),
+                        oldL = colorHSL.L;
+                    // Lighten if color's dark, darker if it's too light.
+                    // Not a proper/generic solution, but in our current case, this should do the trick.
+                    if (colorHSL.L > 0.5) {
+                        colorHSL.L = Math.max(0, oldL - 0.1);
+                    } else {
+                        colorHSL.L = Math.min(1, oldL + 0.1);
+                    }
+                    if (colorHSL.L != oldL) {
+                        var newColor = ColorUtils.stringify_rgb(ColorUtils.hsl_to_rgb(colorHSL));
+                        console.log("[Livecoding.tv] Will try color " + newColor +
+                            "(L = " + colorHSL.L + " vs " + oldL + ")");
+                        return setCustomColor(newColor);
+                    }
+                }
+
+                if (isGoodColor) {
+                    console.log("[Livecoding.tv] Updating color to " + color);
+                    self._updateColor(color);
+                    menu.fadeOut("fast");
+                }
+                return isGoodColor;
+            }
+            return false;
+        };
+        list.find("#colorPremiumSubmit").on("click", onSetCustomColor);
+        if (_colorInputSupported) {
+            list.find("#colorPremiumInput").on("change", onSetCustomColor);
+        } else {
+            list.find("#colorPremiumInput").on("keypress", function (e) {
+                if (13 == (e.keyCode ? e.keyCode : e.which)) {
+                    e.preventDefault();
+                    onSetCustomColor();
+                }
+            });
+        }
+        if ($("#chat-pane").hasClass("poped-out")) {
+          menu.hide()
+            .css({right: 50, top: 20, left: 'inherit', bottom: 'inherit'})
+            .removeClass("left-top left-bottom right-top right-bottom")
+            .addClass("right-top")
+            .fadeIn("fast");
+        } else {
+           menu.hide()
+            .css({right: 74, top: 20, left: 'inherit', bottom: 'inherit'})
+            .removeClass("left-top left-bottom right-top right-bottom")
+            .addClass("right-top")
+            .fadeIn("fast");
+        }
+
+    };
+
+    self._updateColor = function (newColor) {
+        $("#colorPremiumInput").val(newColor);
+        $(Candy).triggerHandler("candy:lctv.color-change", {color: newColor});
+    };
+
+    self.updateColor = function (newColor) {
+        _currentColor = newColor;
+    };
+
+    return self;
+
+}(CandyShop.LivecodingExtras || {}, Candy, jQuery, window.ColorUtils));
