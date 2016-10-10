@@ -4,7 +4,7 @@
   "description": "LiveCoding. Prototyping. Making stuff",
   "main": "index.js",
   "scripts": {
-    "start": "http-server ./ -p 8080 --cors"
+    "start": "http-server ./ -p 9980 --cors"
   },
   "repository": {
     "type": "git",

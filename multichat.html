@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<style>
+			html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+			.chat {
+				float: left;
+				width: calc(100% / 3); height: 100%;
+			}
+			.chat h2 {
+				height: 50px; line-height: 50px;
+				margin: 0; padding: 0 1rem;
+				color: #999;
+				text-align: center;
+				font-size: 1.5rem;
+				font-family: sans-serif;
+			}
+			.chat iframe { border: 0; width: 100%; height: calc(100% - 50px); }
+			.xa { width: 35%; }
+			.lctv { width: 35%; }
+			.gdn { width: 30%; }
+		</style>
+	</head>
+	<body>
+		<div class="chat xa">
+			<h2>XA</h2>
+			<iframe src="https://www.twitch.tv/xenocideacademy/chat"></iframe>
+		</div>
+		<div class="chat lctv">
+			<h2>LCTV</h2>
+			<iframe src="https://www.livecoding.tv/killroy/chat"></iframe></div>
+		<div class="chat gdn">
+			<h2>GDN</h2>
+			<iframe src="https://www.twitch.tv/gamedevnetwork/chat"></iframe>
+		</div>
+	</body>
+</html>
