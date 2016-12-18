@@ -1,0 +1,10 @@
+@import url(stylesheet.css);
+
+#header_wrap .inner {
+	padding-top: 10px;
+}
+
+#header_wrap .flattr_button {
+	position: absolute;
+	top: 20px; right: 0;
+}
